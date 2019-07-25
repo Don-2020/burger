@@ -5,7 +5,7 @@ var burger = require("../models/burger.js");
 
 //create all routes and set up logic
 router.get("/", function (req, res) {
-    burger.all(function (data) {
+    burger.selectAll(function (data) {
         var hbsObject = {
             burgers: data
         };
@@ -28,7 +28,7 @@ router.put("/api/burgers/:id", function (req, res) {
 
     console.log("condition", condition);
 
-    burger.update({
+    burger.updateOne({
         devoured: req.body.devoured
     }, condtion, function (result) {
         if (result.changedRows === 0) {

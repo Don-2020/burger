@@ -78,7 +78,9 @@ var orm = {
 
             cb(data);
         });
-    }
+    },
+
+    delete: funct
 };
 
 // export the orm object
