@@ -6,55 +6,41 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card border border-primary">
-            <div class="card-header bg-primary text-white">
-                Can I take your order?
+     <!-- Dynamically Insert Ready Burgers Here -->
+        {{#each burgers}}
+          {{#unless devoured}}
+          <form action="burger/eat/{{id}}" method="POST">
+            <div class="input-group">
+              <li class="form-control">{{id}}. {{burger_name}}</li>
+                <span class="input-group-btn">
+                  <button class="btn btn-success devour-button" type="submit">Devour It!</button>
+                </span>
             </div>
-            {{!-- create/ add burger form --}}
-            <div class="card-body">
-                <form class="create-form">
-                    <div class="form-group">
-                        <label for="burger">Place Order Here</label>
-                        <input type="text" name="" id="buyBurger" class="form-control" placeholder="">
-                    </div>
-                    <button class="btn btn-primary" type="submit"> Order </button>
-                </form>
-            </div>
-        </div>
+          </form>
+          {{/unless}}
+        {{/each}}
+
+      </div>
     </div>
-</div>
 
-<div class="row mt-4">
-    <div class="col-md-6 mt-4">
-        <div class="card border border-primary">
-            <div class="card-header bg-primary text-white">
+    <!-- Right side (already eaten) -->
+    <div class="col-md-6">
+      <h4 class="red_font">Already eaten!</h4>
+      <div id="already_eaten">
 
+        <!-- Dynamically Insert Eaten Burgers Here -->
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <div class="input-group">
+              <li class="form-control">{{this.id}}. {{this.burger_name}}</li>
+              <span class="input-group-btn">
+                <button class="btn btn-info whine-button" type="button">Whine!</button>
+              </span>
             </div>
-            <div class="card-body">
-                {{#each bugers}}
-                    {{#unless devoured}}
-                        {{> burgers/burger-devoured devour=false}
-                    {{/if }}
-                {{/each}}
-            </div>
-        </div>
-    </div>
-</div>
+          {{/if}}
+        {{/each}}
 
-<div class="col-md-4 mt-4">
-    <div class="card devoured-card">
-        <div class="card-header text-white">
-            Devoured Burgers
-        </div>
-
-        <div class="card-body">
-            {{#each burgers}}
-                {{#if devoured}}
-                    {{> burgers/burger-devoured devour=true}}
-                {{/if}}
-            {{/each}}
-        </div>
+      </div>
     </div>
+  </center>
 </div>

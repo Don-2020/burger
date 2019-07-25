@@ -1,4 +1,4 @@
--- Drops the programming_db if it already exists --
+
 DROP DATABASE IF EXISTS burgers_db;
 
 

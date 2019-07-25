@@ -9,6 +9,7 @@ router.get("/", function (req, res) {
         var hbsObject = {
             burgers: data
         };
+        console.log("error in controller")
         console.log(hbsObject);
         res.render("index", hbsObject);
     });
@@ -19,6 +20,7 @@ router.get("/api/burgers", function (req, res) {
         "burger_name", "devoured"
     ], [req.body.burger_name, req.body.devoured],
         function (data) {
+            console.log("Error right here")
             res.json({ id: data.insertId })
         })
 })
@@ -26,12 +28,14 @@ router.get("/api/burgers", function (req, res) {
 router.put("/api/burgers/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
+    console.log("no error is here")
     console.log("condition", condition);
 
     burger.updateOne({
         devoured: req.body.devoured
     }, condtion, function (result) {
         if (result.changedRows === 0) {
+            console.log("No, no error over heere")
             return res.status(404).end()
         } else {
             res.status(200).end();

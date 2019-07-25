@@ -36,9 +36,12 @@ function printQuestionMarks(num) {
 
 var orm = {
     selectAll: function(tableInput, getResults){
-        var queryString = "SELECT * From ?";
-        connection.query(queryString, [tableInput], function(err, data){
-            if(err) throw err;
+        var queryString = "SELECT * From burgers";
+        connection.query(queryString, function(err, data){
+            if(err){
+                console.log("error 3")
+                throw err;
+            }
             getResults(data);
         });
     },
@@ -57,7 +60,9 @@ var orm = {
 
         connection.query(queryString, val, function(err, data){
             if(err){
+                console.log("Error 1")
                 throw err;
+                
             }
             cb(data);
         });
@@ -73,6 +78,7 @@ var orm = {
         console.log(queryString);
         connection.query(queryString, function(err, data){
             if(err){
+                console.log("Error 2")
                 throw err;
             }
 
@@ -80,7 +86,7 @@ var orm = {
         });
     },
 
-    delete: funct
+    // delete: funct
 };
 
 // export the orm object
