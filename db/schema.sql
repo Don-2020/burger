@@ -1,18 +1,15 @@
 -- Drops the programming_db if it already exists --
-DROP DATABASE IF EXISTS seinfield_db;
+DROP DATABASE IF EXISTS burgers_db;
 
--- Created the DB "wizard_schools_db" (only works on local connections)
-CREATE DATABASE seinfield_db;
 
--- Use the DB wizard_schools_db for all the rest of the script
-USE seinfield_db;
+CREATE DATABASE burgers_db;
 
--- Created the table "schools"
-CREATE TABLE cast (
+USE burgers_db;
+-- Table for burgers
+CREATE TABLE burgers (
   id int AUTO_INCREMENT NOT NULL,
-  name varchar(30) NOT NULL,
-  coolness_points INTEGER(10),
-  attitude VARCHAR(30) NOT NULL,
+  burger_name varchar(30) NOT NULL,
+  devoured BOOLEAN DEFUALT NULL,
   PRIMARY KEY(id)
 );
 
