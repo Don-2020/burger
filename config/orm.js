@@ -41,7 +41,7 @@ var orm = {
             if(err) throw err;
             getResults(data);
         });
-    }
+    },
 
     insertOne: function(table, col, val, cb){
         var queryString= "INSERT INTO "+ table;
@@ -61,7 +61,7 @@ var orm = {
             }
             cb(data);
         });
-    }
+    },
     updateOne: function(table, objColVals, condition, cb){
         var queryString = "UPDATE " + table;
 
