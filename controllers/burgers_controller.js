@@ -6,9 +6,7 @@ var burger = require("../models/burger.js");
 //create all routes and set up logic
 router.get("/", function (req, res) {
     burger.selectAll(function (data) {
-        var hbsObject = {
-            burgers: data
-        };
+        var hbsObject = { burgers: data};
         console.log("error in controller")
         console.log(hbsObject);
         res.render("index", hbsObject);
