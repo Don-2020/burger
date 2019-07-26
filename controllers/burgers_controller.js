@@ -7,20 +7,25 @@ var burger = require("../models/burger.js");
 router.get("/", function (req, res) {
     burger.selectAll(function (data) {
         var hbsObject = { burgers: data};
-        console.log("error in controller")
+        // console.log("error in controller")
         console.log(hbsObject);
         res.render("index", hbsObject);
     });
 })
 
 router.post("/api/burgers", function (req, res) {
-    burger.insertOne(req.body.burger_name, function() {
-        res.redirect('/')
+    burger.insertOne("burger_name",
+    [req.body.burger_name], function(result) {
+        console.log(req.body)
+       res.redirect("/")
     })
 })
 
-router.post("/api/burgers/:id", function (req, res) {
-    burger.updateOne(req.params.id, function(){
+router.put("/api/burgers/:id", function (req, res) {
+    var condition = "id = " + req.params.id;
+    burger.updateOne({
+        devoured: true
+    }, condition, function(data){
         res.redirect('/')
     })
     // var condition = "id = " + req.params.id;
@@ -41,17 +46,17 @@ router.post("/api/burgers/:id", function (req, res) {
 });
 
 //Delete route
-router.delete("/api/burgers/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
+// router.delete("/api/burgers/:id", function (req, res) {
+//     var condition = "id = " + req.params.id;
 
-    burger.delete(condition, function (result) {
-        if (result.affectedRows === 0) {
-            return res.status(404).end()
-        } else {
-            res.status(200).end();
-        }
-    })
-});
+//     burger.delete(condition, function (result) {
+//         if (result.affectedRows === 0) {
+//             return res.status(404).end()
+//         } else {
+//             res.status(200).end();
+//         }
+//     })
+// });
 
 //Export
 module.exports = router;
