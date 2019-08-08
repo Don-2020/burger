@@ -36,7 +36,7 @@ function printQuestionMarks(num) {
 
 var orm = {
     selectAll: function(tableInput, getResults){
-        var queryString = "SELECT * From burgers";
+        var queryString = "SELECT * From " + tableInput + ";";
         connection.query(queryString, function(err, data){
             if(err){
                 console.log("error 3")
@@ -67,24 +67,22 @@ var orm = {
             cb(data);
         });
     },
-    updateOne: function(table, objColVals, condition, cb){
-        var queryString = "UPDATE " + table;
+    updateOne: function(table, objCol, condition, cb){
+     var queryString = "UPDATE " + table;
 
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+     
+     queryString += " SET ";
+     queryString += objToSql(objCol);
+     queryString += " WHERE ";
+     queryString += condition;
 
-        console.log(queryString);
-        connection.query(queryString, function(err, data){
-            if(err){
-                console.log("Error 2")
-                throw err;
-            }
-
-            cb(data);
-        });
-    },
+     connection.query(queryString, function(err, data){
+         if(err){
+             throw err;
+         }
+         cb(data)
+     })
+    }
 
     // delete: funct
 };

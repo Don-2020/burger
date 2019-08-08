@@ -5,58 +5,37 @@ var burger = require("../models/burger.js");
 
 //create all routes and set up logic
 router.get("/", function (req, res) {
-    burger.selectAll(function (data) {
-        var hbsObject = { burgers: data};
+    burger.read(function (data) {
+        var hbsObject = { burgers: data };
         // console.log("error in controller")
-        console.log(hbsObject);
+        console.log("GET");
         res.render("index", hbsObject);
     });
 })
 
 router.post("/api/burgers", function (req, res) {
-    burger.insertOne("burger_name",
-    [req.body.burger_name], function(result) {
-        console.log(req.body)
-       res.redirect("/")
-    })
+    burger.create(req.body.burger_name, function (result) {
+            console.log(req.body.burger_name)
+            res.redirect("/")
+        })
 })
 
 router.put("/api/burgers/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
-    burger.updateOne({
-        devoured: true
-    }, condition, function(data){
-        res.redirect('/')
-    })
-    // var condition = "id = " + req.params.id;
 
-    // console.log("no error is here")
-    // console.log("condition", condition);
+    console.log("hi");
+    res.send(req.params.id)
+    // burger.update(req.params.id, function (res) {
+    //    console.log(res)
+    // })
 
-    // burger.updateOne({
-    //     devoured: req.body.devoured
-    // }, condtion, function (result) {
-    //     if (result.changedRows === 0) {
-    //         console.log("No, no error over heere")
-    //         return res.status(404).end()
-    //     } else {
-    //         res.status(200).end();
-    //     }
-    // });
+
+    // var condition = 'id = '+ req.params.id;
+    // burger.update({
+    //     devoured: true
+    // } , function(data){
+    //     res.redirect("/");
+    // })
 });
-
-//Delete route
-// router.delete("/api/burgers/:id", function (req, res) {
-//     var condition = "id = " + req.params.id;
-
-//     burger.delete(condition, function (result) {
-//         if (result.affectedRows === 0) {
-//             return res.status(404).end()
-//         } else {
-//             res.status(200).end();
-//         }
-//     })
-// });
 
 //Export
 module.exports = router;
